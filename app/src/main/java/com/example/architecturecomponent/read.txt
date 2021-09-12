@@ -1,0 +1,76 @@
+viewbinding
+============
+when view binding is enabled in a module,
+ it generates a binding class for each XML layout file present in that module. An instance of a binding class
+ contains direct references to all views that have an ID in the corresponding layout.
+ view binding replaces findViewById.
+
+ to be ignored while generating binding classes,
+ add the tools:viewBindingIgnore="true"  that layout file:
+
+<LinearLayout
+        ...
+        tools:viewBindingIgnore="true" >
+    ...
+</LinearLayout>
+
+
+
+comparison with data binding
+================================
+Faster compilation: View binding requires no annotation processing, so compile times are faster.
+
+
+view binding limitation
+======================
+View binding doesn't support layout variables or layout expressions, so it can't be used to declare dynamic UI content straight from XML layout files.
+View binding doesn't support two-way data binding.
+
+
+
+databinding
+================
+  allows you to bind UI components in your layouts to data sources in your app using a declarative format rather than programmatically.
+
+layout and binding expression -->
+ The Data Binding Library automatically generates the classes required to bind the views in the layout
+ with your data objects.
+
+ Null coalescing operator --  null coalescing operator (??) chooses the left operand if it isn't null or the right if the former is null.
+ android:text="@{user.displayName ?? user.lastName}"
+
+
+View references -An expression can reference other views in the layout by ID with the following syntax:
+android:text="@{exampleText.text}"
+
+collection -
+collections, such as arrays, lists, sparse lists, and maps,
+can be accessed using the [] operator .
+
+
+string literal
+android:text='@{map["firstName"]}'
+android:text="@{map[`firstName`]}"
+
+
+Resource
+An expression can reference app resources
+android:padding="@{large? @dimen/largePadding : @dimen/smallPadding}"
+
+android:text="@{@string/nameFormat(firstName, lastName)}"
+android:text="@{@plurals/banana(bananaCount)}"
+
+pass property reference or view reference
+android:text="@{@string/example_resource(user.lastName, exampleText.text)}"
+
+
+https://developer.android.com/topic/libraries/data-binding/expressions       ... read more
+
+=========================
+Binding Adapter
+
+
+
+
+
+

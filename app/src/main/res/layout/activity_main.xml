@@ -1,18 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+<layout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
+        <import type="android.util.SparseArray"/>
+        <import type="java.util.Map"/>
+        <import type="java.util.List"/>
+        <variable
+            name="model"
+            type="com.example.architecturecomponent.models.User" />
+        <variable name="list" type="List&lt;String>"/>
+        <variable name="sparse" type="SparseArray&lt;String>"/>
+        <variable name="map" type="Map&lt;String, String>"/>
+        <variable name="index" type="int"/>
+        <variable name="key" type="String"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <Button
+            android:id="@+id/response"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="response1"
+            android:backgroundTint="#141515"
+            android:layout_marginTop="23dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/response2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/response2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="response2"
+            android:backgroundTint="#141515"
+            android:layout_marginTop="23dp"
+            app:layout_constraintStart_toEndOf="@id/response"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/group1"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="profilename,profileImage,age"
+            />
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/group2"
+            android:visibility="invisible"
+            app:constraint_referenced_ids="list1,resource1,map1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/response"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/profilename"
+            android:layout_marginTop="15dp"
+            tools:text="name"
+            android:text="@{model.profileName}"
+            />
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            tools:background="@drawable/ic_launcher_background"
+            app:layout_constraintTop_toBottomOf="@id/profilename"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="15dp"
+            app:layout_constraintBottom_toTopOf="@id/age"
+            android:id="@+id/profileImage"
+
+            />
+
+<!--        android:text="@{model.age.toString(), default = 67}"-->
+<!--        android:text="@{user.displayName != null ? user.displayName : user.lastName}"-->
+<!--        android:text="@{user.displayName ?? user.lastName}"-->
+
+        <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profileImage"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="34dp"
+            android:text="@{profilename.text}"
+            />
+
+
+        <TextView
+            android:id="@+id/list1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/response2"
+            android:text="@{list.get(0)}"
+            />
+        <TextView
+            android:id="@+id/map1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/list1"
+            android:text="@{map[`key1`]}"
+            />
+        <TextView
+            android:id="@+id/resource1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/map1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="2dp"
+            android:text="@{@string/example_data(`justin`)}"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
