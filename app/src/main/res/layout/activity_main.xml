@@ -5,6 +5,7 @@
         <import type="android.util.SparseArray"/>
         <import type="java.util.Map"/>
         <import type="java.util.List"/>
+        <import type="android.view.View"/>
         <variable
             name="model"
             type="com.example.architecturecomponent.models.User" />
@@ -13,6 +14,9 @@
         <variable name="map" type="Map&lt;String, String>"/>
         <variable name="index" type="int"/>
         <variable name="key" type="String"/>
+        <variable
+            name="loader"
+            type="Boolean" />
 
 
     </data>
@@ -81,7 +85,7 @@
             android:layout_marginHorizontal="15dp"
             app:layout_constraintBottom_toTopOf="@id/age"
             android:id="@+id/profileImage"
-
+            app:loadImage="@{model.profileImage}"
             />
 
 <!--        android:text="@{model.age.toString(), default = 67}"-->
@@ -130,5 +134,20 @@
             android:text="@{@string/example_data(`justin`)}"
             />
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chasingDots"
+            style="@style/SpinKitView.Large.ChasingDots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:SpinKit_Color="#1242BC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp"
+            android:visibility="@{loader ? View.VISIBLE : View.GONE}"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
