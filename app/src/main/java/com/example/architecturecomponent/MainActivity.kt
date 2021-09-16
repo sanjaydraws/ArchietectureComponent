@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
             // pass to  setContentView() to see active view on screen
             setContentView(this.root)
         }
+        // Specify the current activity as the lifecycle owner.
+        binding?.lifecycleOwner = this
 
 
 
@@ -62,10 +64,6 @@ class MainActivity : AppCompatActivity() {
             it?:return@Observer
             binding?.model = it
         })
-
-
-
-
 
     }
 }
